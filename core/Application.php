@@ -3,6 +3,8 @@
 
 namespace core;
 
+use PDO;
+
 class Application
 {
     const CONTROLLER_NAMESPACE = 'controllers\\';
@@ -13,11 +15,13 @@ class Application
     const VIEW_DIR = 'views/';
 
     private $_route;
+    private $_db;
     private $_controller;
 
     public function __construct()
     {
         $this->_route = new Route();
+        $this->_db = $this->dbConfig();
     }
 
     public function run()
@@ -40,6 +44,11 @@ class Application
         }
     }
 
+    public function getDb()
+    {
+        return $this->_db;
+    }
+
     public function getRoute()
     {
         return $this->_route;
@@ -48,5 +57,18 @@ class Application
     public function getController()
     {
         return $this->_controller;
+    }
+
+    private function dbConfig()
+    {
+        $db = require 'config/db.php';
+
+        try {
+            return new PDO($db['dsn'] . ';charset=' . $db['charset'], $db['username'], $db['password']);
+        } catch (\Exception $e) {
+            echo $e->getMessage() . '<br>';
+        }
+
+        return null;
     }
 }
