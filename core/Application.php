@@ -9,10 +9,12 @@ class Application
 {
     const CONTROLLER_NAMESPACE = 'controllers\\';
     const MODEL_NAMESPACE = 'models\\';
+    const MIGRATION_NAMESPACE = 'migrations\\';
 
     const CONTROLLER_DIR = 'controllers/';
     const MODEL_DIR = 'models/';
     const VIEW_DIR = 'views/';
+    const MIGRATION_DIR = 'migrations/';
 
     private $_route;
     private $_db;
