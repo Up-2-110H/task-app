@@ -6,6 +6,8 @@
 ```
 git clone https://github.com/Up-2-110H/task-app.git
 ```
+Указать данные базы данных в файле: `/config/db.php`.
+
 Перейти по адресу:
 ```
 http://site_name/migration/up
