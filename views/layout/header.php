@@ -28,4 +28,12 @@
             </button>
         </div>
     <?php endif; ?>
-    <button class="btn btn-block btn-dark mb-2">Авторизация</button>
+    <?php if (\core\FM::$app->getAuth()->getUser()): ?>
+    <a href="/site/logout" class="text-decoration-none">
+        <button class="btn btn-block btn-dark mb-2">Выйти</button>
+    </a>
+    <?php else: ?>
+    <a href="/site/sign-in" class="text-decoration-none">
+        <button class="btn btn-block btn-dark mb-2">Авторизация</button>
+    </a>
+    <?php endif; ?>

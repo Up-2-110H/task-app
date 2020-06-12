@@ -28,8 +28,9 @@ class m200611_151243_add_admin_to_user_table implements MigrationInterface
      */
     public function down()
     {
-        $sql = 'drop table if exists `task`;';
+        $sql = 'delete from user where status=0';
+        $data = FM::$app->getDb()->prepare($sql);
 
-        return FM::$app->getDb()->exec($sql) === false ? false : true;
+        return $data->execute();
     }
 }
