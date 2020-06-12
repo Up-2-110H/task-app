@@ -14,6 +14,14 @@ class SiteController extends Controller
     private $_sortList = ['task.id', 'username', 'email', 'task.status'];
     private $_sortType = ['asc', 'desc'];
 
+    public static function access()
+    {
+        return [
+            'actionSignIn' => '?',
+            'actionLogout' => '@',
+        ];
+    }
+
     /**
      * @param int $page
      * @param int $sort

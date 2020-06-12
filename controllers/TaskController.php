@@ -10,6 +10,15 @@ use models\User;
 
 class TaskController extends Controller
 {
+
+    public static function access()
+    {
+        return [
+            'actionUpdate' => '$',
+            'actionStatusChange' => '$',
+        ];
+    }
+
     /**
      * @return string
      * @throws \Throwable
