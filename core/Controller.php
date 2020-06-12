@@ -30,7 +30,9 @@ class Controller
         extract($params, EXTR_OVERWRITE);
 
         try {
+            require Application::VIEW_DIR . 'layout/header.php';
             require $path;
+            require Application::VIEW_DIR . 'layout/footer.php';
             return ob_get_clean();
         } catch (Exception $e) {
             if (!@ob_end_clean()) {
