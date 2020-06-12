@@ -8,6 +8,14 @@ use core\Migration;
 
 class MigrationController
 {
+
+    public static function access()
+    {
+        return [
+            'actionDown' => '$',
+        ];
+    }
+
     public function actionCreate($migrationName)
     {
         $result = Migration::create($migrationName);

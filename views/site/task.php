@@ -69,6 +69,7 @@
                             type="checkbox"
                             data-id="<?= $task['id'] ?>"
                         <?= $task['status'] ? 'checked' : '' ?>
+                        <?= \core\FM::$app->getAuth()->isAdmin() ? '' : 'disabled' ?>
                     >
                 </div>
             </td>

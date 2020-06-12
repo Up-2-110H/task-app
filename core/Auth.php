@@ -8,7 +8,40 @@ use models\User;
 
 class Auth
 {
+    /**
+     * @var null|User
+     */
     private $_user = null;
+
+    public function can($controller, $action)
+    {
+
+        /** @var array $access */
+        $access = call_user_func([$controller, 'access']);
+
+        if (isset($access[$action])) {
+            switch ($access[$action]) {
+                case '?':
+                    return !$this->isAuth();
+                case '@':
+                    return $this->isAuth();
+                case '$':
+                    return $this->isAdmin();
+            }
+        }
+
+        return true;
+    }
+
+    public function isAuth()
+    {
+        return $this->_user !== null;
+    }
+
+    public function isAdmin()
+    {
+        return $this->isAuth() && $this->_user->status == 0;
+    }
 
     public function login($username, $password)
     {

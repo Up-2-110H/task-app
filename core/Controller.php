@@ -16,6 +16,11 @@ class Controller
         $this->_viewDir = $this->viewDirName() . DIRECTORY_SEPARATOR;
     }
 
+    public static function access()
+    {
+        return [];
+    }
+
     /**
      * @param string $file
      * @param array $params

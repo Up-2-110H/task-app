@@ -16,7 +16,8 @@ class m200612_152639_add_users_to_user_table implements MigrationInterface
         $sql = '';
 
         for ($i = 0; $i < 10; $i++) {
-            $sql .= "insert into user (username, email, password) values ('user_$i', 'user_$i@test.com', 'user_$i');";
+            $sql .= "insert into user (username, email, password)
+                    values ('user_$i', 'user_$i@test.com' , '" . password_hash("user_$i", PASSWORD_DEFAULT) . "');";
 
         }
 

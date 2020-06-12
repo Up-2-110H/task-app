@@ -40,12 +40,23 @@ class Application
             $params = [];
         }
 
-        $result = call_user_func_array([$this->_controller, $route->getAction()], $params);
+        if ($this->_auth->can($controllerName, $route->getAction())) {
 
-        if ($result) {
-            echo $result;
+
+            $result = call_user_func_array([$this->_controller, $route->getAction()], $params);
+
+            if ($result) {
+                echo $result;
+            } else {
+                echo 'Not found';
+            }
         } else {
-            echo 'Not found';
+            if (!$this->_auth->isAuth()) {
+                header('location: /site/sign-in');
+                die();
+            }
+
+            echo 'Not allowed';
         }
     }
 
