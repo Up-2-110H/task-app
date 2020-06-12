@@ -48,12 +48,16 @@ class Route
         $url = rtrim($url, '/');
         $url = explode('/', $url);
 
-        if (isset($url[0])) {
+        if (isset($url[0]) && strlen(trim($url[0]))) {
             $this->_controller = $this->controllerDecode($url[0]);
+        } else {
+            $this->_controller = $this->controllerDecode($this->_controller);
         }
 
-        if (isset($url[1])) {
+        if (isset($url[1]) && strlen(trim($url[0]))) {
             $this->_action = $this->actionDecode($url[1]);
+        } else {
+            $this->_action = $this->actionDecode($this->_action);
         }
 
         if (count($url) > 2) {

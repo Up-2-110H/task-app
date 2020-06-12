@@ -13,7 +13,7 @@ class m200611_151243_add_admin_to_user_table implements MigrationInterface
      */
     public function up()
     {
-        $sql = 'insert into user (username, email, password) values (:username, :email, :password)';
+        $sql = 'insert into user (username, email, password, status) values (:username, :email, :password, 0)';
         $data = FM::$app->getDb()->prepare($sql);
 
         return $data->execute([

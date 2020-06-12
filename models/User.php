@@ -11,6 +11,8 @@ class User extends Model
     public $id;
     public $username;
     public $email;
+    public $password;
+    public $status;
 
     public static function tableName()
     {
