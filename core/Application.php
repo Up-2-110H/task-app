@@ -19,15 +19,18 @@ class Application
     private $_route;
     private $_db;
     private $_controller;
+    private $_auth;
 
     public function __construct()
     {
         $this->_route = new Route();
         $this->_db = $this->dbConfig();
+        $this->_auth = new Auth();
     }
 
     public function run()
     {
+        $this->_auth->checkAuth();
         $route = $this->_route;
         $controllerName = self::CONTROLLER_NAMESPACE . $route->getController();
         $this->_controller = new $controllerName;
@@ -59,6 +62,11 @@ class Application
     public function getController()
     {
         return $this->_controller;
+    }
+
+    public function getAuth()
+    {
+        return $this->_auth;
     }
 
     private function dbConfig()

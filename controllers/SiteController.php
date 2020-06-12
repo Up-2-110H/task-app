@@ -5,6 +5,7 @@ namespace controllers;
 
 
 use core\Controller;
+use core\FM;
 use models\Task;
 
 class SiteController extends Controller
@@ -46,5 +47,37 @@ class SiteController extends Controller
             'row_count' => Task::count(),
             'show_alert' => $show_alert,
         ]);
+    }
+
+    /**
+     * @return string
+     * @throws \Throwable
+     */
+    public function actionSignIn()
+    {
+
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            if (FM::$app->getAuth()->login($_POST['username'], $_POST['password'])) {
+                header('location: /');
+                die();
+            }
+
+            return $this->render('sign-in', [
+                'username' => $_POST['username'],
+                'loginError' => true
+            ]);
+        }
+
+        return $this->render('sign-in', [
+            'username' => '',
+            'loginError' => false
+        ]);
+    }
+
+    public function actionLogout()
+    {
+        FM::$app->getAuth()->logout();
+
+        header('location: /');
     }
 }

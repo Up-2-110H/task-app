@@ -18,4 +18,14 @@ class User extends Model
     {
         return 'user';
     }
+
+    public static function findByUsername($username)
+    {
+        return self::findOne(['username' => $username]);
+    }
+
+    public function checkPassword($password)
+    {
+        return password_verify($password, $this->password);
+    }
 }
